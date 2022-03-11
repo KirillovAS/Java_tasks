@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+class ArrayBubble {
+    private long[] a;
+    private int elems;
+
+    public ArrayBubble(int max) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Введите размер массива: ");
+        int size = input.nextInt();
+
+        a = new long[size];
+        elems = size;
+
+        System.out.println("Введите элементы массива:");
+        for (int i = 0; i < size; i++) {
+            a[i] = input.nextInt(); // Заполняем массив элементами, введёнными с клавиатуры
+        }
+
+        System.out.print ("Введенные элементы массива:");
+        for (int i = 0; i < size; i++) {
+            System.out.print (" " + a[i]); // Выводим на экран, полученный массив
+        }
+        System.out.println();
+    }
+
+    public void into(long value) {
+        a[elems] = value;
+        elems++;
+    }
+
+    public void printer() {
+        for (int i = 0; i < elems; i++) {
+            System.out.print(a[i] + " ");
+            System.out.println(" ");
+        }
+        System.out.println("----Окончание ввода массива----");
+    }
+
+    private void toSwap(int first, int second) {
+        long temp = a[first];
+        a[first] = a[second];
+        a[second] = temp;
+    }
+
+    public void bubbleSorter() {
+        for (int out = elems - 1; out >= 1; out--) {
+            for (int in = 0; in < out; in++) {
+                if (a[in] > a[in + 1]) {
+                    toSwap(in, in + 1);
+                }
+            }
+        }
+    }
+}
+
+
+
