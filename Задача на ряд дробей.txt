@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class RyadDrobei {
+    public static void main(String args[]) {
+        int resultA = 0; //Итоговый числитель
+        int resultB = 0; //Итоговый знаменатель
+        int a = 0; //Текущий числитель
+        int b = 0; //Текущий знаменатель
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите число слагаемых: ");
+        int num = in.nextInt();
+
+        System.out.printf("Ряд для : %d слагаемых \n \n", num);
+        in.close();
+//Цикл по каждому слагаемому, стартуем с нуля для задания первоначальных значений дроби
+        for (int n = 0; n < num + 1; n++) {
+            //result=result+Math.pow(-1,n+1)*(n/Math.pow(n+1,2));
+            //  System.out.println(n);
+            //System.out.println(result);
+            System.out.println("Шаг " + n);
+            a = (int) (Math.pow(-1, n + 1) * n); //Числитель
+            System.out.println("a = " + a);
+            b = (int) Math.pow(n + 1, 2); //Знаменатель
+            System.out.println("b = " + b);
+            if (n == 0) {
+                resultA = resultA + a;
+                System.out.println("resultA = " + resultA);
+                resultB = resultB + b;
+                System.out.println("resultB = " + resultB);
+            } else {
+                resultA = resultA * b + a * resultB; //Новый числитель
+                resultB = resultB * b; //Новый знаменатель
+
+                int obsh_del = gcd(resultA, resultB); //Находим наибольший общей делитель и сокращаем дробь
+                resultA = resultA / obsh_del;
+                resultB = resultB / obsh_del;
+
+                System.out.println("resultA = " + resultA);
+                System.out.println("resultB = " + resultB);
+            }
+
+            System.out.println();
+            System.out.println("Числитель a = " + resultA);
+            System.out.println("Знаменатель b = " + resultB);
+
+
+        }
+
+
+    }
+
+    //Метод для определения наибольшего общего делителя для сокращения итоговой дроби
+    public static int gcd(int a, int b) {
+        while (b != 0) {
+            int tmp = a % b;
+            a = b;
+            b = tmp;
+        }
+        return a;
+    }
+
+
+}
